@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MyMath</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="section_1">函数与极限</string>
+    <string name="section_2">导数与积分</string>
+    <string name="section_3">微分中值定理</string>
+    <string name="section_4">不定积分</string>
+    <string name="section_5">定积分</string>
+    <string name="section_6">定积分的应用</string>
+    <string name="section_7">微分方程</string>
+
+    <string name="drawer_section">分栏</string>
+    <string name="drawer_item_settings">设置</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

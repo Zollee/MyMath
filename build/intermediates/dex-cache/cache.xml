@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.mikepenz.iconics\library\0.8.4\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4f6f5020d4d4312f45c51efcd67170026f013d92">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\classes-a9f46d7f24e4b577ad88a081d58851dd56f59006.jar" />
+    </item>
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.mikepenz.iconics\library\0.8.4\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4f6f5020d4d4312f45c51efcd67170026f013d92">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\classes-a9f46d7f24e4b577ad88a081d58851dd56f59006.jar" />
+    </item>
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.mikepenz.materialdrawer\library\2.6.8\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="14d133d0f00e46ec6d8557851b3ef4c64feef058">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\classes-3657bd4f06b37ef3547100801c9dc39f8bc285af.jar" />
+    </item>
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.mikepenz.materialdrawer\library\2.6.8\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="14d133d0f00e46ec6d8557851b3ef4c64feef058">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\classes-3657bd4f06b37ef3547100801c9dc39f8bc285af.jar" />
+    </item>
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\classes-9ee65341116890cf74b919a54fe743a382a380f7.jar" />
+    </item>
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\classes-9576d46e744a6dddf1bbf322c98dfb25df3a0d6b.jar" />
+    </item>
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\classes-9ee65341116890cf74b919a54fe743a382a380f7.jar" />
+    </item>
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-8ae9b300510656eebf439e0e45c3f110f80fea7d.jar" />
+    </item>
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-8ae9b300510656eebf439e0e45c3f110f80fea7d.jar" />
+    </item>
+    <item
+        jar="F:\workspace\Android\MyMath\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\classes-9576d46e744a6dddf1bbf322c98dfb25df3a0d6b.jar" />
+    </item>
+    <item
+        jar="C:\Tech\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-b78f4602c50e4ff4b90ea378689dd5ba65e379d4.jar" />
+    </item>
+    <item
+        jar="C:\Tech\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="F:\workspace\Android\MyMath\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-b78f4602c50e4ff4b90ea378689dd5ba65e379d4.jar" />
+    </item>
+
+</items>
