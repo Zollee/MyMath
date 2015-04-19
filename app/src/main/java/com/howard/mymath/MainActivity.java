@@ -1,8 +1,7 @@
 package com.howard.mymath;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,20 +19,26 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 
-public class MainActivity extends ActionBarActivity implements ItemFragment.OnFragmentInteractionListener{
+public class MainActivity extends ActionBarActivity
+        implements ItemFragment.OnFragmentInteractionListener, DetailFragment.OnFragmentInteractionListener{
+    Resources myResources;
+    String title = new String("");
 
     private AccountHeader.Result headerResult = null;
     private Drawer.Result result = null;
-    //public DBManager dbHelper;
+    public DBManager dbHelper;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //dbHelper = new DBManager(this);
-        //dbHelper.openDatabase();
+        myResources = getResources();
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        dbHelper = new DBManager(this);
+        dbHelper.openDatabase();
 
         headerResult = new AccountHeader()
                 .withActivity(this)
@@ -65,48 +70,44 @@ public class MainActivity extends ActionBarActivity implements ItemFragment.OnFr
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         if (drawerItem != null) {
                             if (drawerItem.getIdentifier() == 1) {
-                                toolbar.setTitle(R.string.section_1);
-
-                                FragmentManager fragmentManager = getFragmentManager();
-                                fragmentManager.beginTransaction()
-                                        .replace(R.id.fragment_main, new ItemFragment())
-                                        .addToBackStack(null)
-                                        .commit();
+                                title = myResources.getString(R.string.section_1);
                             } else if (drawerItem.getIdentifier() == 2) {
-                                toolbar.setTitle(R.string.section_2);
-
-                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                                //fragmentTransaction.replace(R.id.frag, new MainFragment());
-                                //fragmentTransaction.commit();
+                                title = myResources.getString(R.string.section_2);
                             } else if (drawerItem.getIdentifier() == 3) {
-                                toolbar.setTitle(R.string.section_3);
-                                //Intent intent = new Intent(SimpleHeaderDrawerActivity.this, MultiDrawerActivity.class);
-                                //SimpleHeaderDrawerActivity.this.startActivity(intent);
+                                title = myResources.getString(R.string.section_3);
                             } else if (drawerItem.getIdentifier() == 4) {
-                                toolbar.setTitle(R.string.section_4);
+                                title = myResources.getString(R.string.section_4);
                                 //Intent intent = new Intent(SimpleHeaderDrawerActivity.this, SimpleNonTranslucentDrawerActivity.class);
                                 //SimpleHeaderDrawerActivity.this.startActivity(intent);
                             } else if (drawerItem.getIdentifier() == 5) {
-                                toolbar.setTitle(R.string.section_5);
+                                title = myResources.getString(R.string.section_5);
                                 //Intent intent = new Intent(SimpleHeaderDrawerActivity.this, ComplexHeaderDrawerActivity.class);
                                 //SimpleHeaderDrawerActivity.this.startActivity(intent);
                             } else if (drawerItem.getIdentifier() == 6) {
-                                toolbar.setTitle(R.string.section_6);
+                                title = myResources.getString(R.string.section_6);
                                 //Intent intent = new Intent(SimpleHeaderDrawerActivity.this, SimpleFragmentDrawerActivity.class);
                                 //SimpleHeaderDrawerActivity.this.startActivity(intent);
                             } else if (drawerItem.getIdentifier() == 7) {
-                                toolbar.setTitle(R.string.section_7);
+                                title = myResources.getString(R.string.section_7);
                                 //Intent intent = new Intent(SimpleHeaderDrawerActivity.this, EmbeddedDrawerActivity.class);
                                 //SimpleHeaderDrawerActivity.this.startActivity(intent);
                             }
+                            toolbar.setTitle(title);
+
+                            ItemFragment f = new ItemFragment();
+                            Bundle mbundle = new Bundle();
+                            mbundle.putString("position", ""+drawerItem.getIdentifier());
+                            f.setArguments(mbundle);
+
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_main, f)
+                                    .commit();
                         }
                     }
                 })
                 .build();
         toolbar.setTitle("MyMath");
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -133,9 +134,18 @@ public class MainActivity extends ActionBarActivity implements ItemFragment.OnFr
         //handle the back press :D close the drawer first and if the drawer is closed close the activity
         if (result != null && result.isDrawerOpen()) {
             result.closeDrawer();
-        } else {
-            super.onBackPressed();
+        } else if(getFragmentManager().getBackStackEntryCount() > 0 ){
+            toolbar.setTitle(title);
+            getFragmentManager().popBackStack();
         }
+        else{
+                super.onBackPressed();
+        }
+    }
+
+    public void onDestroy(){
+        dbHelper.closeDatabase();
+        super.onDestroy();
     }
 
     public void onFragmentInteraction(String newItem){

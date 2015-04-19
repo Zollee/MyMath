@@ -1,8 +1,12 @@
 package com.howard.mymath;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ItemFragment extends Fragment implements AbsListView.OnItemClickListener {
+    private Toolbar toolbar;
+    private SQLiteDatabase database;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,6 +65,8 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        database = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -69,12 +78,22 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
     }
 
     private ArrayList<String> getData(){
-        mList.add("1");
-        mList.add("2");
-        mList.add("3");
-        mList.add("4");
-        mList.add("5");
+        String position = getArguments().getString("position");
 
+        Cursor cur = database.rawQuery("SELECT book.name FROM book WHERE book.position = " + position , null);
+
+        if (cur != null) {
+            if (cur.moveToFirst()) {
+                do {
+                    String name = cur.getString(cur.getColumnIndex("name"));
+                    mList.add(name);
+                } while (cur.moveToNext());
+            }
+        } else {
+            return null;
+        }
+
+        cur.close();
         return mList;
     }
 
@@ -98,6 +117,8 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
         super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;
+            toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar);
+
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -113,11 +134,18 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //if (null != mListener) {
+        if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
            // mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
-        //}
+            toolbar.setTitle(((TextView)view).getText());
+
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_main, new DetailFragment())
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     /**
