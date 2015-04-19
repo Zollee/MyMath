@@ -2,6 +2,7 @@ package com.howard.mymath;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -19,7 +20,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ItemFragment extends Fragment implements AbsListView.OnItemClickListener {
-    private Toolbar toolbar;
     private SQLiteDatabase database;
 
 
@@ -117,8 +117,6 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
         super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;
-            toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar);
-
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -138,13 +136,11 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
            // mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
-            toolbar.setTitle(((TextView)view).getText());
 
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_main, new DetailFragment())
-                    .addToBackStack(null)
-                    .commit();
+            Intent intent = new Intent(getActivity(),DetailActivity.class);
+            intent.putExtra("title",(String)((TextView) view).getText());
+            startActivity(intent);
+
         }
     }
 

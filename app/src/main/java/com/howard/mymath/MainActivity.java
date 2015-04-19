@@ -20,7 +20,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 
 public class MainActivity extends ActionBarActivity
-        implements ItemFragment.OnFragmentInteractionListener, DetailFragment.OnFragmentInteractionListener{
+        implements ItemFragment.OnFragmentInteractionListener{
     Resources myResources;
     String title = new String("");
 
@@ -37,6 +37,7 @@ public class MainActivity extends ActionBarActivity
         myResources = getResources();
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
+
         dbHelper = new DBManager(this);
         dbHelper.openDatabase();
 
