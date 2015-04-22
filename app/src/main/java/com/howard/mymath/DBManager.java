@@ -1,8 +1,5 @@
 package com.howard.mymath;
 
-/**
- * Created by Howard on 02/04/2015.
- */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -61,6 +58,11 @@ public class DBManager {
     }
 
     public void closeDatabase() {
+        File file = new File(DB_PATH + "/" + DB_NAME);
+
+        if(file.exists())
+            file.delete();
+
         this.database.close();
     }
 }

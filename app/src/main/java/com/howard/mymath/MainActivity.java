@@ -144,6 +144,16 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    public void onStart(){
+        dbHelper = new DBManager(this);
+        dbHelper.openDatabase();
+        super.onStart();
+    }
+
+    public void onStop(){
+        super.onStop();
+    }
+
     public void onDestroy(){
         dbHelper.closeDatabase();
         super.onDestroy();
