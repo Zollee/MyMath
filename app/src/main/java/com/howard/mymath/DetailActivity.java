@@ -3,10 +3,14 @@ package com.howard.mymath;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,19 +25,15 @@ public class DetailActivity extends ActionBarActivity {
 
     TextView[] sub_definition = new TextView[3];
     TextView[] sub_display = new TextView[3];
-    TextView[] sub_nature = new TextView[3];
+    TextView[] sub_nature = new TextView[4];
 
     TextView[] text_definition = new TextView[3];
     TextView[] text_display = new TextView[3];
-    TextView[] text_nature = new TextView[3];
-
-    ImageView[] image_definition = new ImageView[3];
-    ImageView[] image_display = new ImageView[3];
-    ImageView[] image_nature = new ImageView[3];
+    TextView[] text_nature = new TextView[4];
 
     View[] divider_definition = new View[2];
     View[] divider_display = new View[2];
-    View[] divider_nature = new View[2];
+    View[] divider_nature = new View[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,8 @@ public class DetailActivity extends ActionBarActivity {
         sub_nature[0] = (TextView)findViewById(R.id.sub_nature_1);
         sub_nature[1] = (TextView)findViewById(R.id.sub_nature_2);
         sub_nature[2] = (TextView)findViewById(R.id.sub_nature_3);
+        sub_nature[3] = (TextView)findViewById(R.id.sub_nature_4);
+
 
         text_definition[0] = (TextView)findViewById(R.id.text_definition_1);
         text_definition[1] = (TextView)findViewById(R.id.text_definition_2);
@@ -66,16 +68,7 @@ public class DetailActivity extends ActionBarActivity {
         text_nature[0] = (TextView)findViewById(R.id.text_nature_1);
         text_nature[1] = (TextView)findViewById(R.id.text_nature_2);
         text_nature[2] = (TextView)findViewById(R.id.text_nature_3);
-
-        image_definition[0] = (ImageView)findViewById(R.id.image_definition_1);
-        image_definition[1] = (ImageView)findViewById(R.id.image_definition_2);
-        image_definition[2] = (ImageView)findViewById(R.id.image_definition_3);
-        image_display[0] = (ImageView)findViewById(R.id.image_display_1);
-        image_display[1] = (ImageView)findViewById(R.id.image_display_2);
-        image_display[2] = (ImageView)findViewById(R.id.image_display_3);
-        image_nature[0] = (ImageView)findViewById(R.id.image_nature_1);
-        image_nature[1] = (ImageView)findViewById(R.id.image_nature_2);
-        image_nature[2] = (ImageView)findViewById(R.id.image_nature_3);
+        text_nature[3] = (TextView)findViewById(R.id.text_nature_4);
 
         divider_definition[0] = findViewById(R.id.divider_definition_1);
         divider_definition[1] = findViewById(R.id.divider_definition_2);
@@ -83,6 +76,7 @@ public class DetailActivity extends ActionBarActivity {
         divider_display[1] = findViewById(R.id.divider_display_2);
         divider_nature[0] = findViewById(R.id.divider_nature_1);
         divider_nature[1] = findViewById(R.id.divider_nature_2);
+        divider_nature[2] = findViewById(R.id.divider_nature_3);
 
         View view = findViewById(R.id.view);
         if(android.os.Build.VERSION.SDK_INT<19)
@@ -108,63 +102,61 @@ public class DetailActivity extends ActionBarActivity {
         natureCreate();
     }
 
+    final Html.ImageGetter imageGetter = new Html.ImageGetter() {
+
+        public Drawable getDrawable(String source) {
+            Drawable drawable = null;
+            int id = getResources().getIdentifier(source,"drawable", "com.howard.mymath");
+            drawable = getResources().getDrawable(id);
+            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable
+                    .getIntrinsicHeight());
+            return drawable;
+        }
+    };
+
     public void definitionCreate(){
-        String where = "SELECT definition.name, definition.definition, definition.image FROM definition JOIN book ON book.key_id = definition.main WHERE book.name = '"+ title + "'";
+        String where = "SELECT definition.name, definition.definition FROM definition JOIN book ON book.key_id = definition.main WHERE book.name = '"+ title + "'";
         Cursor cur = database.rawQuery(where, null);
 
         if (cur != null) {
             String subText;
             String mainText;
-            String imageID;
+
             int i = 1;
 
             if (cur.moveToFirst()) {
                 subText = cur.getString(cur.getColumnIndex("name"));
                 mainText = cur.getString(cur.getColumnIndex("definition"));
-                imageID = cur.getString(cur.getColumnIndex("image"));
 
                 if (subText != null){
                     card[0].setVisibility(View.VISIBLE);
                     sub_definition[0].setVisibility(View.VISIBLE);
                     text_definition[0].setVisibility(View.VISIBLE);
 
-                    sub_definition[0].setText(subText);
-                    text_definition[0].setText(mainText.replace("|", "\n"));
+                    sub_definition[0].setText(Html.fromHtml(subText));
+                    text_definition[0].setText(Html.fromHtml(mainText, imageGetter, null));
                 }else if (mainText != null){
                     card[0].setVisibility(View.VISIBLE);
                     text_definition[0].setVisibility(View.VISIBLE);
-                    text_definition[0].setText(mainText.replace("|", "\n"));
-                }
-
-                if (imageID != null){
-                    image_definition[0].setVisibility(View.VISIBLE);
-                    int id = getResources().getIdentifier(imageID, "mipmap", "com.howard.mymath");
-                    image_definition[0].setImageResource(id);
+                    text_definition[0].setText(Html.fromHtml(mainText, imageGetter, null));
                 }
             }
 
             while(cur.moveToNext()){
                 subText = cur.getString(cur.getColumnIndex("name"));
                 mainText = cur.getString(cur.getColumnIndex("definition"));
-                imageID = cur.getString(cur.getColumnIndex("image"));
 
                 if (subText != null){
                     divider_definition[i-1].setVisibility(View.VISIBLE);
                     sub_definition[i].setVisibility(View.VISIBLE);
                     text_definition[i].setVisibility(View.VISIBLE);
 
-                    sub_definition[i].setText(subText);
-                    text_definition[i].setText(mainText.replace("|", "\n"));
+                    sub_definition[i].setText(Html.fromHtml(subText));
+                    text_definition[i].setText(Html.fromHtml(mainText, imageGetter, null));
                 }else if (mainText != null){
                     divider_definition[i-1].setVisibility(View.VISIBLE);
                     text_definition[i].setVisibility(View.VISIBLE);
-                    text_definition[i].setText(mainText.replace("|", "\n"));
-                }
-
-                if (imageID != null){
-                    image_definition[i].setVisibility(View.VISIBLE);
-                    int id = getResources().getIdentifier(imageID, "mipmap", "com.howard.mymath");
-                    image_definition[i].setImageResource(id);
+                    text_definition[i].setText(Html.fromHtml(mainText, imageGetter, null));
                 }
 
                 i++;
@@ -175,63 +167,49 @@ public class DetailActivity extends ActionBarActivity {
     }
 
     public void displayCreate(){
-        String where = "SELECT display.name, display.definition, display.image FROM display JOIN book ON book.key_id = display.main WHERE book.name = '"+ title + "'";
+        String where = "SELECT display.name, display.definition FROM display JOIN book ON book.key_id = display.main WHERE book.name = '"+ title + "'";
         Cursor cur = database.rawQuery(where, null);
 
         if (cur != null) {
             String subText;
             String mainText;
-            String imageID;
             int i = 1;
 
             if (cur.moveToFirst()) {
                 subText = cur.getString(cur.getColumnIndex("name"));
                 mainText = cur.getString(cur.getColumnIndex("definition"));
-                imageID = cur.getString(cur.getColumnIndex("image"));
 
                 if (subText != null){
                     card[1].setVisibility(View.VISIBLE);
                     sub_display[0].setVisibility(View.VISIBLE);
                     text_display[0].setVisibility(View.VISIBLE);
 
-                    sub_display[0].setText(subText);
-                    text_display[0].setText(mainText.replace("|", "\n"));
+                    sub_display[0].setText(Html.fromHtml(subText));
+                    text_display[0].setText(Html.fromHtml(mainText, imageGetter, null));
                 }else if (mainText != null){
                     card[1].setVisibility(View.VISIBLE);
                     text_display[0].setVisibility(View.VISIBLE);
-                    text_display[0].setText(mainText.replace("|", "\n"));
-                }
-
-                if (imageID != null){
-                    image_display[0].setVisibility(View.VISIBLE);
-                    int id = getResources().getIdentifier(imageID, "mipmap", "com.howard.mymath");
-                    image_display[0].setImageResource(id);
+                    text_display[0].setText(Html.fromHtml(mainText, imageGetter, null));
                 }
             }
 
             while(cur.moveToNext()){
                 subText = cur.getString(cur.getColumnIndex("name"));
                 mainText = cur.getString(cur.getColumnIndex("definition"));
-                imageID = cur.getString(cur.getColumnIndex("image"));
 
                 if (subText != null){
                     divider_display[i-1].setVisibility(View.VISIBLE);
                     sub_display[i].setVisibility(View.VISIBLE);
                     text_display[i].setVisibility(View.VISIBLE);
 
-                    sub_display[i].setText(subText);
-                    text_display[i].setText(mainText.replace("|", "\n"));
+                    sub_display[i].setText(Html.fromHtml(subText));
+                    text_display[i].setText(Html.fromHtml(mainText, imageGetter, null));
                 }else if (mainText != null){
                     divider_display[i-1].setVisibility(View.VISIBLE);
                     text_display[i].setVisibility(View.VISIBLE);
-                    text_display[i].setText(mainText.replace("|", "\n"));
+                    text_display[i].setText(Html.fromHtml(mainText, imageGetter, null));
                 }
 
-                if (imageID != null){
-                    image_display[i].setVisibility(View.VISIBLE);
-                    int id = getResources().getIdentifier(imageID, "mipmap", "com.howard.mymath");
-                    image_display[i].setImageResource(id);
-                }
                 i++;
             }
 
@@ -240,61 +218,49 @@ public class DetailActivity extends ActionBarActivity {
     }
 
     public void natureCreate(){
-        String where = "SELECT nature.name, nature.definition, nature.image FROM nature JOIN book ON book.key_id = nature.main WHERE book.name = '"+ title + "'";
+        String where = "SELECT nature.name, nature.definition FROM nature JOIN book ON book.key_id = nature.main WHERE book.name = '"+ title + "'";
         Cursor cur = database.rawQuery(where, null);
 
         if (cur != null) {
             String subText;
             String mainText;
-            String imageID;
             int i = 1;
 
             if (cur.moveToFirst()) {
                 subText = cur.getString(cur.getColumnIndex("name"));
                 mainText = cur.getString(cur.getColumnIndex("definition"));
-                imageID = cur.getString(cur.getColumnIndex("image"));
 
                 if (subText != null){
                     card[2].setVisibility(View.VISIBLE);
                     sub_nature[0].setVisibility(View.VISIBLE);
                     text_nature[0].setVisibility(View.VISIBLE);
 
-                    sub_nature[0].setText(subText);
-                    text_nature[0].setText(mainText.replace("|", "\n"));
+                    sub_nature[0].setText(Html.fromHtml(subText));
+                    text_nature[0].setText(Html.fromHtml(mainText, imageGetter, null));
                 }else if (mainText != null){
                     card[2].setVisibility(View.VISIBLE);
                     text_nature[0].setVisibility(View.VISIBLE);
-                    text_nature[0].setText(mainText.replace("|", "\n"));
-                }
-                if (imageID != null){
-                    image_nature[0].setVisibility(View.VISIBLE);
-                    int id = getResources().getIdentifier(imageID, "mipmap", "com.howard.mymath");
-                    image_nature[0].setImageResource(id);
+                    text_nature[0].setText(Html.fromHtml(mainText, imageGetter, null));
                 }
             }
 
             while(cur.moveToNext()){
                 subText = cur.getString(cur.getColumnIndex("name"));
                 mainText = cur.getString(cur.getColumnIndex("definition"));
-                imageID = cur.getString(cur.getColumnIndex("image"));
 
                 if (subText != null){
                     divider_nature[i-1].setVisibility(View.VISIBLE);
                     sub_nature[i].setVisibility(View.VISIBLE);
                     text_nature[i].setVisibility(View.VISIBLE);
 
-                    sub_nature[i].setText(subText);
-                    text_nature[i].setText(mainText.replace("|", "\n"));
+                    sub_nature[i].setText(Html.fromHtml(subText));
+                    text_nature[i].setText(Html.fromHtml(mainText, imageGetter, null));
                 }else if (mainText != null){
                     divider_nature[i-1].setVisibility(View.VISIBLE);
                     text_nature[i].setVisibility(View.VISIBLE);
-                    text_nature[i].setText(mainText.replace("|", "\n"));
+                    text_nature[i].setText(Html.fromHtml(mainText, imageGetter, null));
                 }
-                if (imageID != null){
-                    image_nature[i].setVisibility(View.VISIBLE);
-                    int id = getResources().getIdentifier(imageID, "mipmap", "com.howard.mymath");
-                    image_nature[i].setImageResource(id);
-                }
+
                 i++;
             }
 
