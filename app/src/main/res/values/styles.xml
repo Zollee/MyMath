@@ -52,12 +52,10 @@
         <item name="android:paddingRight">16dp</item>
     </style>
 
-    <style name="mImage">
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
+    <style name="NumberButton">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/md_white_1000</item>
+        <item name="android:layout_margin">1dp</item>
     </style>
 
 </resources>

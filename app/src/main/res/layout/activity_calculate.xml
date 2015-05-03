@@ -1,0 +1,224 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.howard.mymath.Calculate">
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:id="@+id/view"
+        android:background="@color/material_drawer_primary"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_cal"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:layout_below="@+id/view"
+        android:layout_alignParentStart="true" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:id="@+id/table"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            >
+            <Button
+                android:id="@+id/num7"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                android:text="7"
+                style="@style/NumberButton"
+                android:background="@drawable/button" />
+
+            <Button
+                android:id="@+id/num8"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/button"
+                android:text="8"  />
+
+            <Button
+                android:id="@+id/num9"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/button"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/division"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/symbol"
+                android:text="÷" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            >
+            <Button
+                android:id="@+id/num4"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/button"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/num5"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/button"
+                android:text="5"  />
+
+            <Button
+                android:id="@+id/num6"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/button"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/multiply"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/symbol"
+                android:text="×" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            >
+            <Button
+                android:id="@+id/num1"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/button"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/num2"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/button"
+                android:text="2"  />
+
+            <Button
+                android:id="@+id/num3"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/button"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/minus"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/symbol"
+                android:text="-" />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            >
+            <Button
+                android:id="@+id/dot"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/symbol"
+                android:text="." />
+
+            <Button
+                android:id="@+id/num0"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/button"
+                android:text="0"  />
+
+            <Button
+                android:id="@+id/equ"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/symbol"
+                android:text="=" />
+
+            <Button
+                android:id="@+id/plus"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.25"
+                style="@style/NumberButton"
+                android:background="@drawable/symbol"
+                android:text="+" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/linearLayout"
+        android:layout_above="@+id/table"
+        android:layout_alignParentStart="true" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="0.25"
+                android:layout_height="fill_parent"
+                android:id="@+id/editText"
+                android:singleLine="true"
+                android:gravity="end"
+                android:ellipsize="start"
+                android:background="@color/window_background" />
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_weight="0.75"
+                android:layout_height="fill_parent"
+                android:id="@+id/delete"
+                android:src="@android:drawable/ic_input_delete"
+                android:longClickable="true"
+                style="@style/NumberButton"
+                android:background="@drawable/symbol"
+                android:baselineAlignBottom="false" />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:background="@color/window_background"
+        android:layout_height="match_parent"
+        android:id="@+id/showResult"
+        android:gravity="bottom|end"
+        android:editable="false"
+        android:layout_above="@+id/linearLayout"
+        android:layout_below="@+id/toolbar_cal"
+        android:layout_alignParentStart="true"
+        />
+</RelativeLayout>

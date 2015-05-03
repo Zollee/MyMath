@@ -13,7 +13,10 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -106,6 +109,17 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+
+        ListView listView = (ListView) view.findViewById(android.R.id.list);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.attachToListView(listView);
+
+        fab.setOnClickListener(new  View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),Calculate.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

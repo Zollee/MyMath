@@ -108,6 +108,7 @@ public class MainActivity extends ActionBarActivity
                 })
                 .build();
         toolbar.setTitle("MyMath");
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

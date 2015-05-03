@@ -3,8 +3,6 @@ package com.howard.mymath;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -25,15 +22,15 @@ public class DetailActivity extends ActionBarActivity {
 
     TextView[] sub_definition = new TextView[3];
     TextView[] sub_display = new TextView[3];
-    TextView[] sub_nature = new TextView[4];
+    TextView[] sub_nature = new TextView[6];
 
     TextView[] text_definition = new TextView[3];
     TextView[] text_display = new TextView[3];
-    TextView[] text_nature = new TextView[4];
+    TextView[] text_nature = new TextView[6];
 
     View[] divider_definition = new View[2];
     View[] divider_display = new View[2];
-    View[] divider_nature = new View[3];
+    View[] divider_nature = new View[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +54,8 @@ public class DetailActivity extends ActionBarActivity {
         sub_nature[1] = (TextView)findViewById(R.id.sub_nature_2);
         sub_nature[2] = (TextView)findViewById(R.id.sub_nature_3);
         sub_nature[3] = (TextView)findViewById(R.id.sub_nature_4);
+        sub_nature[4] = (TextView)findViewById(R.id.sub_nature_5);
+        sub_nature[5] = (TextView)findViewById(R.id.sub_nature_6);
 
 
         text_definition[0] = (TextView)findViewById(R.id.text_definition_1);
@@ -69,6 +68,8 @@ public class DetailActivity extends ActionBarActivity {
         text_nature[1] = (TextView)findViewById(R.id.text_nature_2);
         text_nature[2] = (TextView)findViewById(R.id.text_nature_3);
         text_nature[3] = (TextView)findViewById(R.id.text_nature_4);
+        text_nature[4] = (TextView)findViewById(R.id.text_nature_5);
+        text_nature[5] = (TextView)findViewById(R.id.text_nature_6);
 
         divider_definition[0] = findViewById(R.id.divider_definition_1);
         divider_definition[1] = findViewById(R.id.divider_definition_2);
@@ -77,11 +78,12 @@ public class DetailActivity extends ActionBarActivity {
         divider_nature[0] = findViewById(R.id.divider_nature_1);
         divider_nature[1] = findViewById(R.id.divider_nature_2);
         divider_nature[2] = findViewById(R.id.divider_nature_3);
+        divider_nature[3] = findViewById(R.id.divider_nature_4);
+        divider_nature[4] = findViewById(R.id.divider_nature_5);
 
         View view = findViewById(R.id.view);
         if(android.os.Build.VERSION.SDK_INT<19)
             view.setVisibility(View.GONE);
-
 
         title = intent.getStringExtra("title");
 
